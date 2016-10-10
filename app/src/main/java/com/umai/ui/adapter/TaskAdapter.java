@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.umai.R;
@@ -38,7 +39,13 @@ public class TaskAdapter extends SelectableAdapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Data task = tasks.get(position);
+
         holder.task.setText(task.getName());
+        if (task.getState() == 0) {
+            holder.task_state.setChecked(false);
+        } else {
+            holder.task_state.setChecked(true);
+        }
     }
 
 
@@ -60,6 +67,9 @@ public class TaskAdapter extends SelectableAdapter<TaskAdapter.ViewHolder> {
 
         @BindView(R.id.task)
         TextView task;
+
+        @BindView(R.id.task_state)
+        CheckBox task_state;
 
         public ViewHolder(View v) {
             super(v);
