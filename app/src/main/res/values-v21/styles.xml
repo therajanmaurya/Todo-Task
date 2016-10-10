@@ -19,6 +19,7 @@
 
     <style name="Theme.Todo" parent="Base.Theme.Todo">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
 </resources>

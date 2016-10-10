@@ -52,8 +52,6 @@ public class MainActivity extends BaseActivity implements MainMvpView,
     @Inject
     MainPresenter mMainPresenter;
 
-    TodoAdapter mTodoAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +124,7 @@ public class MainActivity extends BaseActivity implements MainMvpView,
     public void showTodos(List<Data> pendingTasks, List<Data> doneTasks) {
         mViewPager.setVisibility(View.VISIBLE);
         mTodoTabs.setVisibility(View.VISIBLE);
-        mTodoAdapter = new TodoAdapter(getSupportFragmentManager());
+        TodoAdapter mTodoAdapter = new TodoAdapter(getSupportFragmentManager());
         mTodoAdapter.addFragment(PendingFragment.newInstance(pendingTasks),
                 getString(R.string.pending));
         mTodoAdapter.addFragment(DoneFragment.newInstance(doneTasks), getString(R.string.done));

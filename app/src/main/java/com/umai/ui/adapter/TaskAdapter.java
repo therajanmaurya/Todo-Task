@@ -61,6 +61,7 @@ public class TaskAdapter extends SelectableAdapter<TaskAdapter.ViewHolder> {
 
     public void setTask(List<Data> tasks) {
         this.tasks = tasks;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

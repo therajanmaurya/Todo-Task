@@ -6,4 +6,5 @@
     <string name="add_task">Add Task</string>
     <string name="what_is_task">Whats\'s your Task?</string>
     <string name="state">Task State</string>
+    <string name="delete">Delete</string>
 </resources>
