@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">UMAI</string>
+    <string name="app_name">Todo</string>
+    <string name="pending">Pending</string>
+    <string name="done">Done</string>
 </resources>

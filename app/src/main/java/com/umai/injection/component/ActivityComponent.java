@@ -2,6 +2,8 @@ package com.umai.injection.component;
 
 import com.umai.injection.PerActivity;
 import com.umai.injection.module.ActivityModule;
+import com.umai.ui.donefragment.DoneFragment;
+import com.umai.ui.pendingfragment.PendingFragment;
 import com.umai.ui.main.MainActivity;
 
 import dagger.Component;
@@ -15,4 +17,8 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
+
+    void inject(PendingFragment pendingFragment);
+
+    void inject(DoneFragment doneFragment);
 }
