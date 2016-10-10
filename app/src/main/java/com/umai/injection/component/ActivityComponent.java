@@ -2,8 +2,8 @@ package com.umai.injection.component;
 
 import com.umai.injection.PerActivity;
 import com.umai.injection.module.ActivityModule;
-import com.umai.ui.donefragment.DoneFragment;
-import com.umai.ui.pendingfragment.PendingFragment;
+import com.umai.ui.done.DoneFragment;
+import com.umai.ui.pending.PendingFragment;
 import com.umai.ui.main.MainActivity;
 
 import dagger.Component;

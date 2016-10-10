@@ -1,4 +1,4 @@
-package com.umai.ui.donefragment;
+package com.umai.ui.pending;
 
 import com.umai.ui.base.BasePresenter;
 
@@ -8,15 +8,16 @@ import javax.inject.Inject;
  * Created by Rajan Maurya on 10/10/16.
  */
 
-public class DonePresenter extends BasePresenter<DoneMvpView> {
+public class PendingPresenter extends BasePresenter<PendingMvpView> {
+
 
     @Inject
-    public DonePresenter() {
+    public PendingPresenter() {
 
     }
 
     @Override
-    public void attachView(DoneMvpView mvpView) {
+    public void attachView(PendingMvpView mvpView) {
         super.attachView(mvpView);
     }
 

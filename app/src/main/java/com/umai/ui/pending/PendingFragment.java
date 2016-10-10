@@ -1,4 +1,4 @@
-package com.umai.ui.donefragment;
+package com.umai.ui.pending;
 
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.umai.R;
 import com.umai.data.model.Data;
+import com.umai.ui.UpdateTasks;
 import com.umai.ui.adapter.TaskAdapter;
 import com.umai.ui.base.BaseActivity;
 import com.umai.utils.Constant;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by Rajan Maurya on 10/10/16.
  */
 
-public class DoneFragment extends Fragment implements DoneMvpView {
+public class PendingFragment extends Fragment implements PendingMvpView, UpdateTasks {
 
     @BindView(R.id.rv_todo)
     RecyclerView rv_todo;
@@ -37,18 +38,18 @@ public class DoneFragment extends Fragment implements DoneMvpView {
     TaskAdapter mTaskAdapter;
 
     @Inject
-    DonePresenter mDonePresenter;
+    PendingPresenter mPendingPresenter;
 
     View rootView;
-    private List<Data> doneTasks;
+    private List<Data> pendingTasks;
 
-    public static DoneFragment newInstance(List<Data> todoDatas) {
+    public static PendingFragment newInstance(List<Data> todoDatas) {
         Bundle arguments = new Bundle();
-        DoneFragment doneFragment = new DoneFragment();
-        arguments.putParcelableArrayList(Constant.DONE_TASK,
+        PendingFragment pendingFragment = new PendingFragment();
+        arguments.putParcelableArrayList(Constant.PENDING_TASK,
                 (ArrayList<? extends Parcelable>) todoDatas);
-        doneFragment.setArguments(arguments);
-        return doneFragment;
+        pendingFragment.setArguments(arguments);
+        return pendingFragment;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class DoneFragment extends Fragment implements DoneMvpView {
         super.onCreate(savedInstanceState);
         ((BaseActivity) getActivity()).activityComponent().inject(this);
         if (getArguments() != null) {
-            doneTasks = getArguments().getParcelableArrayList(Constant.DONE_TASK);
+            pendingTasks = getArguments().getParcelableArrayList(Constant.PENDING_TASK);
         }
     }
 
@@ -65,7 +66,7 @@ public class DoneFragment extends Fragment implements DoneMvpView {
             @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_todo_list, container, false);
         ButterKnife.bind(this, rootView);
-        mDonePresenter.attachView(this);
+        mPendingPresenter.attachView(this);
         showUserInterface();
 
         return rootView;
@@ -77,13 +78,19 @@ public class DoneFragment extends Fragment implements DoneMvpView {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_todo.setLayoutManager(layoutManager);
         rv_todo.setHasFixedSize(true);
-        mTaskAdapter.setTask(doneTasks);
+        mTaskAdapter.setTask(pendingTasks);
         rv_todo.setAdapter(mTaskAdapter);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mDonePresenter.detachView();
+        mPendingPresenter.detachView();
+    }
+
+    @Override
+    public void addTask(Data task) {
+        pendingTasks.add(task);
+        mTaskAdapter.notifyDataSetChanged();
     }
 }

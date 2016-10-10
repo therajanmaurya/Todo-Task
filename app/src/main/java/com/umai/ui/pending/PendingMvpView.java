@@ -1,4 +1,4 @@
-package com.umai.ui.donefragment;
+package com.umai.ui.pending;
 
 import com.umai.ui.base.MvpView;
 
@@ -6,7 +6,7 @@ import com.umai.ui.base.MvpView;
  * Created by Rajan Maurya on 10/10/16.
  */
 
-public interface DoneMvpView  extends MvpView {
+public interface PendingMvpView extends MvpView {
 
     void showUserInterface();
 }
