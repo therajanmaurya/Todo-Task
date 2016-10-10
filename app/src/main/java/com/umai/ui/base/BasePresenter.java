@@ -1,4 +1,4 @@
-package com.umai.base;
+package com.umai.ui.base;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for

@@ -1,4 +1,4 @@
-package com.umai.base;
+package com.umai.ui.base;
 
 
 /**

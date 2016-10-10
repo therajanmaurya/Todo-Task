@@ -1,4 +1,4 @@
-package com.umai.base;
+package com.umai.ui.base;
 
 /**
  * Every presenter in the app must either implement this interface or extend BasePresenter
