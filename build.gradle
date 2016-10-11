@@ -16,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        maven { url "https://www.jitpack.io" }
         jcenter()
     }
 }
@@ -35,6 +36,7 @@ ext {
     // App dependencies
     supportLibraryVersion = '24.2.1'
     retrofitVersionLatest = '2.1.0'
+    raizLabsDBFlow = '3.1.1'
     daggerVersion = '2.2'
     butterKnifeVersion = '8.0.1'
     okHttp3Version = '3.3.1'
