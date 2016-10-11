@@ -110,6 +110,8 @@ public class PendingFragment extends Fragment implements PendingMvpView, UpdateT
     public void onItemClick(View childView, int position) {
         if (actionMode != null) {
             toggleSelection(position);
+        } else {
+            mTaskAdapter.changeState(position);
         }
     }
 

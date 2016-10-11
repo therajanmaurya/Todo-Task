@@ -111,6 +111,8 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
     public void onItemClick(View childView, int position) {
         if (actionMode != null) {
             toggleSelection(position);
+        } else {
+            mTaskAdapter.changeState(position);
         }
     }
 
