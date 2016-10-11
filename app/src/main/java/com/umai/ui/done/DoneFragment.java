@@ -168,10 +168,12 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.delete:
+                    List<Data> removeTasks = new ArrayList<>();
                     for (Integer position : mTaskAdapter.getSelectedItems()) {
-                        doneTasks.remove(doneTasks.get(position));
-                        mTaskAdapter.notifyDataSetChanged();
+                        removeTasks.add(doneTasks.get(position));
                     }
+                    doneTasks.removeAll(removeTasks);
+                    mTaskAdapter.notifyDataSetChanged();
                     mode.finish();
 
                 default:
