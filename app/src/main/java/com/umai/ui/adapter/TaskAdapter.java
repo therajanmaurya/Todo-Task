@@ -48,16 +48,6 @@ public class TaskAdapter extends SelectableAdapter<TaskAdapter.ViewHolder> {
         }
     }
 
-    public void changeState(int position) {
-        int toggle =  tasks.get(position).getState();
-        if (toggle == 1) {
-            tasks.get(position).setState(0);
-        } else {
-            tasks.get(position).setState(1);
-        }
-        notifyItemChanged(position);
-    }
-
     @Override
     public long getItemId(int i) {
         return 0;
