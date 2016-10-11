@@ -9,4 +9,6 @@ import com.umai.data.model.Data;
 public interface UpdateTasks {
 
     void addTask(Data task);
+
+    void removeTask(Data task);
 }

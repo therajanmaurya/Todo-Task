@@ -7,4 +7,5 @@
     <string name="what_is_task">Whats\'s your Task?</string>
     <string name="state">Task State</string>
     <string name="delete">Delete</string>
+    <string name="undo_task">Do you want task back?</string>
 </resources>

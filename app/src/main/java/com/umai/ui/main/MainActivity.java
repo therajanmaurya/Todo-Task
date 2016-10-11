@@ -166,4 +166,15 @@ public class MainActivity extends BaseActivity implements MainMvpView,
                     .findFragmentByTag(getFragmentTag(0))).addTask(task);
         }
     }
+
+    @Override
+    public void undoTaskState(Data task) {
+        if (task.getState() == 1) {
+            ((UpdateTasks) getSupportFragmentManager()
+                    .findFragmentByTag(getFragmentTag(1))).removeTask(task);
+        } else {
+            ((UpdateTasks) getSupportFragmentManager()
+                    .findFragmentByTag(getFragmentTag(0))).removeTask(task);
+        }
+    }
 }

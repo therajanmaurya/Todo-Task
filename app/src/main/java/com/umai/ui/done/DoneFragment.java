@@ -1,8 +1,10 @@
 package com.umai.ui.done;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.umai.R;
 import com.umai.data.model.Data;
@@ -83,18 +86,6 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
         return rootView;
     }
 
-   /* // Store the listener (activity) that will have events fired once the fragment is attached
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof UpdateTaskState) {
-            listener = (UpdateTaskState) context;
-        } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement MyListFragment.UpdateTaskState");
-        }
-    }
-    */
     @Override
     public void showUserInterface() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -121,14 +112,37 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
     }
 
     @Override
+    public void removeTask(Data task) {
+        doneTasks.remove(task);
+        mTaskAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onItemClick(View childView, int position) {
         if (actionMode != null) {
             toggleSelection(position);
         } else {
-            //Store task and add restore functionality
-            mTaskAdapter.changeState(position);
-            ((UpdateTaskState) getActivity()).changeTaskState(doneTasks.get(position));
-            mTaskAdapter.removeTask(position);
+            doneTasks.get(position).setState(0);
+            final Data task = doneTasks.get(position);
+            ((UpdateTaskState) getActivity()).changeTaskState(task);
+            removeTask(task);
+
+            //Undo task
+            final Snackbar snackbar = Snackbar.make(rootView, getString(R.string.undo_task), 5000);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id
+                    .snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((UpdateTaskState) getActivity()).undoTaskState(task);
+                    task.setState(1);
+                    addTask(task);
+                    snackbar.dismiss();
+                }
+            });
+            snackbar.show();
         }
     }
 
