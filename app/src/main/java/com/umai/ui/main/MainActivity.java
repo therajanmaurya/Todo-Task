@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.umai.R;
 import com.umai.data.model.Data;
+import com.umai.ui.UpdateTaskState;
 import com.umai.ui.UpdateTasks;
 import com.umai.ui.adapter.TodoAdapter;
 import com.umai.ui.base.BaseActivity;
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainMvpView,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener, UpdateTaskState {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity implements MainMvpView,
 
     @Inject
     MainPresenter mMainPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,5 +154,16 @@ public class MainActivity extends BaseActivity implements MainMvpView,
     protected void onDestroy() {
         super.onDestroy();
         mMainPresenter.detachView();
+    }
+
+    @Override
+    public void changeTaskState(Data task) {
+        if (task.getState() == 1) {
+            ((UpdateTasks) getSupportFragmentManager()
+                    .findFragmentByTag(getFragmentTag(1))).addTask(task);
+        } else {
+            ((UpdateTasks) getSupportFragmentManager()
+                    .findFragmentByTag(getFragmentTag(0))).addTask(task);
+        }
     }
 }

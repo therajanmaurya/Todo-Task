@@ -48,6 +48,11 @@ public class TaskAdapter extends SelectableAdapter<TaskAdapter.ViewHolder> {
         }
     }
 
+    public void removeTask(int position) {
+        tasks.remove(position);
+        notifyDataSetChanged();
+    }
+
     public void changeState(int position) {
         int toggle =  tasks.get(position).getState();
         if (toggle == 1) {

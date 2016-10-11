@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.umai.R;
 import com.umai.data.model.Data;
+import com.umai.ui.UpdateTaskState;
 import com.umai.ui.UpdateTasks;
 import com.umai.ui.adapter.TaskAdapter;
 import com.umai.ui.base.BaseActivity;
@@ -82,6 +83,18 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
         return rootView;
     }
 
+   /* // Store the listener (activity) that will have events fired once the fragment is attached
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof UpdateTaskState) {
+            listener = (UpdateTaskState) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.UpdateTaskState");
+        }
+    }
+    */
     @Override
     public void showUserInterface() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -112,7 +125,10 @@ public class DoneFragment extends Fragment implements DoneMvpView, UpdateTasks,
         if (actionMode != null) {
             toggleSelection(position);
         } else {
+            //Store task and add restore functionality
             mTaskAdapter.changeState(position);
+            ((UpdateTaskState) getActivity()).changeTaskState(doneTasks.get(position));
+            mTaskAdapter.removeTask(position);
         }
     }
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.umai.R;
 import com.umai.data.model.Data;
+import com.umai.ui.UpdateTaskState;
 import com.umai.ui.UpdateTasks;
 import com.umai.ui.adapter.TaskAdapter;
 import com.umai.ui.base.BaseActivity;
@@ -111,7 +112,10 @@ public class PendingFragment extends Fragment implements PendingMvpView, UpdateT
         if (actionMode != null) {
             toggleSelection(position);
         } else {
+            //Store task and add restore functionality
             mTaskAdapter.changeState(position);
+            ((UpdateTaskState) getActivity()).changeTaskState(pendingTasks.get(position));
+            mTaskAdapter.removeTask(position);
         }
     }
 
